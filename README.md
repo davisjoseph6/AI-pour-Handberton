@@ -1,4 +1,4 @@
-# Handberton-davis-contribution-
+# Intelligence artificielle pour Handberton
 
 pip install Flask tensorflow
 
