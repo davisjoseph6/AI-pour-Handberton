@@ -3,7 +3,7 @@
 pip install Flask tensorflow
 
 
-bonjours davis je n'ai pas de retour de mes collegues donc je vais te donner ma partie de liste d'instruction interessante
+liste d'instruction interessante
 11:49
 pour les calculs je souhaite que tout calcul de  0 a 5 peut etre effectué exemple "how much is 2 + 2"  ou l'ia sera capable de faire donner la reponse a la main
 11:50
