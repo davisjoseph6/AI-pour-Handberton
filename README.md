@@ -1,7 +1,58 @@
 # Intelligence artificielle pour Handberton
 
-pip install tensorflow pandas scikit-learn nltk
+# AI-pour-Handberton
 
+This project integrates AI features into a robotic hand using TensorFlow 2 and Keras. The robotic hand is controlled via a web interface, and it responds to various commands using a neural network for intent recognition.
+
+## Directory Structure
+
+AI-pour-Handberton/
+│
+├── AI/
+│ ├── intent_recognition_model.h5
+│ ├── intent_recognition_model_v2.h5
+│ ├── intent_to_label.pkl
+│ ├── intent_to_label_v2.pkl
+│ ├── neural_network.py
+│ ├── vectorizer.pkl
+│ ├── vectorizer_v2.pkl
+│ ├── hand_control.py
+│
+├── handberton-website-proto.html
+├── README.md
+├── requirements.txt
+├── app.py
+
+## Setup Instructions.
+
+1. **Install Dependencies**:
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+2. **Train the Neural Network**:
+    ```sh
+    cd AI
+    python neural_network.py
+    ```
+
+3. **Run the Flask Server**:
+    ```sh
+    python app.py
+    ```
+
+4. **Open the Web Interface**:
+    Open `handberton-website-proto.html` in a web browser.
+
+## Usage
+
+Enter commands into the web interface to control the robotic hand. The recognized intents will be processed, and the corresponding actions will be sent to the Arduino to control the hand's movements.
+
+
+
+
+pip install tensorflow pandas scikit-learn nltk
+pip install pyserial
 
 AI features to the robotic hand using Tensorflow 2 and Keras. 
 
@@ -43,33 +94,3 @@ Function: all fingers will open
 
 Intent: "goodbye"
 Function: all fingers will close.
-
-
-liste d'instruction interessante
-
-11:49
-pour les calculs je souhaite que tout calcul de  0 a 5 peut etre effectué exemple "how much is 2 + 2"  ou l'ia sera capable de faire donner la reponse a la main
-
-11:50
-gerer un compte a rebour de 0 a 5 seconde ex "countdown 3 seconds"
-
-11:54
-etre capable de levé un doigt entierement ou a moitié quand il lui est demandé ex "raise the index finger completely"
-
-11:54
-faire la difference entre chaque doigts
-
-11:56
-repondre oui avec le pouce ah des yes no answer
-
-11:58
-repondre non avec l'index a des yes no answer
-
-12:02
-au moin 1 easter eggs comme repondre :i_love_you_hand_sign: a "rock n roll"
-
-12:03
-etre capable de fermer et ouvrir le poing quand on lui dira "say hello/goodbye"
-
-12:06
-voila! on a deja une idée de ce que pourra demandé en general (je me suis permis de mettre comment la main réagirait pour anticiper)

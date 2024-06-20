@@ -136,6 +136,12 @@
         <div id="status" class="status">Disconnected</div>
     </div>
 
+    <div class="command-panel">
+        <h3>Command Panel</h3>
+        <input type="text" id="commandInput" placeholder="Enter command" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+        <button id="sendCommand">Send Command</button>
+    </div>
+
     <script>
         let port;
         let writer;
@@ -160,6 +166,20 @@
 
         document.getElementById('startCalibration').addEventListener('click', () => {
             sendCommand('startCalibration');
+        });
+
+        document.getElementById('sendCommand').addEventListener('click', () => {
+            const command = document.getElementById('commandInput').value;
+            fetch('/process_command', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ command })
+            })
+            .then(response => response.json())
+            .then(data => {
+                updateStatus(`Intent: ${data.intent}, Command: ${data.command}`);
+            })
+            .catch(error => console.error('Error:', error));
         });
 
         function sendCommand(command) {
@@ -196,3 +216,4 @@
     </script>
 </body>
 </html>
+

@@ -35,8 +35,7 @@ intents = [
     "respond_to_question",
     "rock_n_roll",
     "hello",
-    "goodbye",
-    "other"  # Default or unknown intent
+    "goodbye"
 ]
 
 # Create a mapping of intents to labels
@@ -108,13 +107,13 @@ model.summary()
 model.fit(X_train, y_train, epochs=10, batch_size=4, verbose=1, validation_data=(X_test, y_test))
 
 # Save the model for later use
-model.save("intent_recognition_model.h5")
+model.save("intent_recognition_model_v2.h5")
 
 # Save the vectorizer for later use
-with open('vectorizer.pkl', 'wb') as f:
+with open('vectorizer_v2.pkl', 'wb') as f:
     pickle.dump(vectorizer, f)
 
 # Save the label encoder
-with open('intent_to_label.pkl', 'wb') as f:
+with open('intent_to_label_v2.pkl', 'wb') as f:
     pickle.dump(intent_to_label, f)
 

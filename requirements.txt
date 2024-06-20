@@ -1,3 +1,6 @@
-Flask
+flask
 tensorflow
+scikit-learn
+nltk
+pyserial
 
