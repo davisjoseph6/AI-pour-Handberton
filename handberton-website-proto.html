@@ -15,7 +15,7 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
         }
-        .control-panel, .calibration-panel {
+        .control-panel, .calibration-panel, .command-panel {
             padding: 20px;
             background: #fff;
             border-radius: 8px;
@@ -135,13 +135,11 @@
         </div>
         <div id="status" class="status">Disconnected</div>
     </div>
-
     <div class="command-panel">
         <h3>Command Panel</h3>
         <input type="text" id="commandInput" placeholder="Enter command" style="width: 100%; padding: 10px; margin-bottom: 10px;">
         <button id="sendCommand">Send Command</button>
     </div>
-
     <script>
         let port;
         let writer;
