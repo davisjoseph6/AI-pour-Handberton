@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-import serial
 import time
+from mock_arduino import MockArduino
 
-# Establish a serial connection to the Arduino
-arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=9600, timeout=.1)
+# Use the MockArduino class instead of serial.Serial
+arduino = MockArduino()
 
 def send_to_arduino(command):
-    arduino.write(bytes(command + '\n', 'utf-8'))
+    arduino.write(command + '\n')
     time.sleep(0.1)
 
 def countdown(seconds):

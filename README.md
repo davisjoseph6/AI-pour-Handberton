@@ -34,11 +34,13 @@ AI-pour-Handberton/
     ```sh
     cd AI
     python neural_network.py
+	or ./neural_network.py
     ```
 
 3. **Run the Flask Server**:
     ```sh
     python app.py
+	or ./app.py
     ```
 
 4. **Open the Web Interface**:
@@ -48,6 +50,84 @@ AI-pour-Handberton/
 
 Enter commands into the web interface to control the robotic hand. The recognized intents will be processed, and the corresponding actions will be sent to the Arduino to control the hand's movements.
 
+---------------------
+
+#NOTE - please make these changes
+
+----
+Connect Arduino to computer
+
+ls ls /dev/tty*
+
+--------
+Update the hand_control.py after connecting the arduino 
+
+--
+
+replace
+
+# Use the MockArduino class instead of serial.Serial
+arduino = MockArduino()
+
+def send_to_arduino(command):
+    arduino.write(command + '\n')
+    time.sleep(0.1)
+
+--
+
+with
+
+# Establish a serial connection to the Arduino
+
+arduino = serial.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=.1)
+
+
+
+def send_to_arduino(command):
+
+    arduino.write(bytes(command + '\n', 'utf-8'))
+
+    time.sleep(0.1)
+
+----
+
+verify serial communication
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    String command = Serial.readStringUntil('\n');
+    if (command == "finger1:open") {
+      digitalWrite(LED_BUILTIN, HIGH); // Turn the LED on
+    } else if (command == "finger1:close") {
+      digitalWrite(LED_BUILTIN, LOW); // Turn the LED off
+    }
+    // Add more commands as needed
+  }
+}
+
+-------
+
+test it
+
+./hand_control.py
+
+if the test is successful, update the app.py with the changes:
+line 1 from flask import Flask, request, jsonify, send_from_directory
+line 7: app = Flask(__name__, static_url_path='')
+line 18: 
+@app.route('/')
+
+def index():
+
+    return send_from_directory('', 'handberton-website-proto.html')
+
+
+-------------------------
 
 
 
