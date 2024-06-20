@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Panel</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .control-panel, .calibration-panel {
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 300px;
+            margin: 10px;
+        }
+        .calibration-panel {
+            width: auto; /* Adjust width to fit content */
+        }
+        .calibration-panel .motor-controls {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        .motor-control {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .motor-control .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 100%;
+            box-sizing: border-box;
+            color: #fff;
+            background-color: #007bff;
+            cursor: pointer;
+        }
+        .motor-control button {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+        }
+        .status {
+            color: #888;
+            font-size: 14px;
+            text-align: center;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+    <div class="calibration-panel">
+        <h3>Calibrage</h3>
+        <p>Déplacer les doigts pour qu'ils soient complètement dépliés</p>
+        <button id="startCalibration">Commencer Calibrage</button>
+        <div class="motor-controls">
+            <div class="motor-control" data-motor="1">Pouce (Doigt 1): 
+                <div class="buttons">
+                    <button class="up" onmousedown="sendCalibrateCommand('motor1:up')" onmouseup="sendCalibrateCommand('motor1:stop')">↑</button>
+                    <button class="down" onmousedown="sendCalibrateCommand('motor1:down')" onmouseup="sendCalibrateCommand('motor1:stop')">↓</button>
+                </div>
+            </div>
+            <div class="motor-control" data-motor="2">Index (Doigt 2): 
+                <div class="buttons">
+                    <button class="up" onmousedown="sendCalibrateCommand('motor2:up')" onmouseup="sendCalibrateCommand('motor2:stop')">↑</button>
+                    <button class="down" onmousedown="sendCalibrateCommand('motor2:down')" onmouseup="sendCalibrateCommand('motor2:stop')">↓</button>
+                </div>
+            </div>
+            <div class="motor-control" data-motor="3">Majeur (Doigt 3): 
+                <div class="buttons">
+                    <button class="up" onmousedown="sendCalibrateCommand('motor3:up')" onmouseup="sendCalibrateCommand('motor3:stop')">↑</button>
+                    <button class="down" onmousedown="sendCalibrateCommand('motor3:down')" onmouseup="sendCalibrateCommand('motor3:stop')">↓</button>
+                </div>
+            </div>
+            <div class="motor-control" data-motor="4">Annulaire (Doigt 4): 
+                <div class="buttons">
+                    <button class="up" onmousedown="sendCalibrateCommand('motor4:up')" onmouseup="sendCalibrateCommand('motor4:stop')">↑</button>
+                    <button class="down" onmousedown="sendCalibrateCommand('motor4:down')" onmouseup="sendCalibrateCommand('motor4:stop')">↓</button>
+                </div>
+            </div>
+            <div class="motor-control" data-motor="5">Petit Doigt (Doigt 5): 
+                <div class="buttons">
+                    <button class="up" onmousedown="sendCalibrateCommand('motor5:up')" onmouseup="sendCalibrateCommand('motor5:stop')">↑</button>
+                    <button class="down" onmousedown="sendCalibrateCommand('motor5:down')" onmouseup="sendCalibrateCommand('motor5:stop')">↓</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="control-panel">
+        <button id="connect">Connect to Arduino</button>
+        <div class="motor-control" data-motor="1">Pouce (Doigt 1): 
+            <button onclick="sendCommand('finger1:open')">Ouvrir</button>
+            <button onclick="sendCommand('finger1:close')">Fermer</button>
+        </div>
+        <div class="motor-control" data-motor="2">Index (Doigt 2): 
+            <button onclick="sendCommand('finger2:open')">Ouvrir</button>
+            <button onclick="sendCommand('finger2:close')">Fermer</button>
+        </div>
+        <div class="motor-control" data-motor="3">Majeur (Doigt 3): 
+            <button onclick="sendCommand('finger3:open')">Ouvrir</button>
+            <button onclick="sendCommand('finger3:close')">Fermer</button>
+        </div>
+        <div class="motor-control" data-motor="4">Annulaire (Doigt 4): 
+            <button onclick="sendCommand('finger4:open')">Ouvrir</button>
+            <button onclick="sendCommand('finger4:close')">Fermer</button>
+        </div>
+        <div class="motor-control" data-motor="5">Petit Doigt (Doigt 5): 
+            <button onclick="sendCommand('finger5:open')">Ouvrir</button>
+            <button onclick="sendCommand('finger5:close')">Fermer</button>
+        </div>
+        <div id="status" class="status">Disconnected</div>
+    </div>
+
+    <script>
+        let port;
+        let writer;
+        let isConnected = false;
+
+        document.getElementById('connect').addEventListener('click', async () => {
+            if ('serial' in navigator) {
+                try {
+                    port = await navigator.serial.requestPort();
+                    await port.open({ baudRate: 9600 });
+                    writer = port.writable.getWriter();
+                    isConnected = true;
+                    updateStatus('Connected to Arduino');
+                } catch (error) {
+                    console.error('Error connecting to Arduino:', error);
+                    updateStatus('Connection failed: ' + error.message);
+                }
+            } else {
+                updateStatus('Web Serial API not supported.');
+            }
+        });
+
+        document.getElementById('startCalibration').addEventListener('click', () => {
+            sendCommand('startCalibration');
+        });
+
+        function sendCommand(command) {
+            if (isConnected && writer) {
+                try {
+                    const encoder = new TextEncoder();
+                    const data = encoder.encode(command + '\n');
+                    writer.write(data);
+                    updateStatus('Command sent: ' + command);
+                } catch (error) {
+                    console.error('Error sending command:', error);
+                    updateStatus('Send failed: ' + error.message);
+                }
+            }
+        }
+
+        function sendCalibrateCommand(command) {
+            if (isConnected && writer) {
+                try {
+                    const encoder = new TextEncoder();
+                    const data = encoder.encode(command + '\n');
+                    writer.write(data);
+                    updateStatus('Calibrate command sent: ' + command);
+                } catch (error) {
+                    console.error('Error sending calibrate command:', error);
+                    updateStatus('Send failed: ' + error.message);
+                }
+            }
+        }
+
+        function updateStatus(message) {
+            document.getElementById('status').textContent = message;
+        }
+    </script>
+</body>
+</html>
