@@ -30,4 +30,4 @@ au moin 1 easter eggs comme repondre :i_love_you_hand_sign: a "rock n roll"
 etre capable de fermer et ouvrir le poing quand on lui dira "say hello/goodbye"
 
 12:06
-voila on a deja une idée de ce que pourra demandé en general (je me suis permis de mettre comment la main réagirait pour anticiper)
+voila! on a deja une idée de ce que pourra demandé en general (je me suis permis de mettre comment la main réagirait pour anticiper)
