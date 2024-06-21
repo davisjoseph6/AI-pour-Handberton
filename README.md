@@ -96,7 +96,7 @@ Enter commands into the web interface to control the robotic hand. The recognize
 
 - Identify the correct port for your Arduino (it could be /dev/ttyUSB0, /dev/ttyACM0, etc.) and update the serial.Serial line in `hand_control.py` accordingly.
 
-- Update app.py if necessary
+- Update `app.py` if necessary
 
 - (Optional) Verify serial communication: 
 	- Upload a simple Arduino sketch to your Arduino board to verify the communication. This sketch will send and receive data over the serial port.
