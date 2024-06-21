@@ -33,20 +33,18 @@ AI-pour-Handberton/
 2. **Train the Neural Network**:
     ```sh
     cd AI
-    python neural_network.py
-	or ./neural_network.py
+    ./neural_network.py
     ```
 
 3. **Run the Flask Server**:
     ```sh
-    python app.py
-	or ./app.py
+    ./app.py
     ```
 
 4. **Open the Web Interface**:
     Navigate to `http://localhost:8000` in a web browser.
 
-5. **Click Connect to Arduino**:
+5. **Click Connect to Arduino**
 
 
 ## Usage
@@ -68,7 +66,7 @@ Enter commands into the web interface to control the robotic hand. The recognize
 Manually connect Arduino to computer
 
    ```sh
-ls ls /dev/tty*
+   ls /dev/tty*
   ```
 
 --------
@@ -79,8 +77,7 @@ Update the `hand_control.py` after connecting the arduino
 replace
 
     ```sh
- # Use the MockArduino class instead of serial.Serial"
-arduino = MockArduino()
+  arduino = MockArduino()
 
 def send_to_arduino(command):
     arduino.write(command + '\n')
@@ -91,9 +88,7 @@ def send_to_arduino(command):
 with
 
     ```sh
- # Establish a serial connection to the Arduino"
-
-arduino = serial.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=.1)
+ arduino = serial.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=.1)
     
 
 
@@ -125,6 +120,7 @@ void loop() {
     // Add more commands as needed
   }
 }
+
   ```
 
 -------
