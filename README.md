@@ -114,16 +114,6 @@ Enter commands into the web interface to control the robotic hand. The recognize
 
 ---
 
-### About the Project:
-
-AI features to the robotic hand using Tensorflow 2 and Keras. 
-
-The index number of thumb is 1 , index number of the index finger is 2, of the middle is 3, of the ring is 4, and of the pinky is 5. The string variable of thumb is "thumb" , index number "index", of the middle is "middle", the ring is "ring", and of the pinky is "pinky". 
-
-The value for the Flex sensor is for each finger is between 10Ω (when a finger is closed) to 30/50Ω (and when a finger is fully extended).
-
-The AI receives instructions through a chat interface where the user inputs the command and the finger's shoud respond automatically.
-
 ### Questions to ask the AI
 
 Here's a comprehensive list of intents with specifics and details for each intent. These intents are recognized by the intent recognition model and the corresponding actions they trigger in the hand control system.
@@ -194,8 +184,18 @@ Here's a comprehensive list of intents with specifics and details for each inten
 - rock_n_roll: Calls the rock_n_roll() function.
 - hello: Calls the hello() function.
 - goodbye: Calls the goodbye() function.
-  
-#### Implementation Details
+
+## About the Project:
+
+AI features to the robotic hand using Tensorflow 2 and Keras. 
+
+The index number of thumb is 1 , index number of the index finger is 2, of the middle is 3, of the ring is 4, and of the pinky is 5. The string variable of thumb is "thumb" , index number "index", of the middle is "middle", the ring is "ring", and of the pinky is "pinky". 
+
+The value for the Flex sensor is for each finger is between 10Ω (when a finger is closed) to 30/50Ω (and when a finger is fully extended).
+
+The AI receives instructions through a chat interface where the user inputs the command and the finger's shoud respond automatically.
+
+### Implementation Details
 Intent Recognition Model
 - Model Architecture:
 	- Input Layer: Dense layer with 128 units and ReLU activation.
