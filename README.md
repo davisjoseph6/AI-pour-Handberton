@@ -105,7 +105,7 @@ Enter commands into the web interface to control the robotic hand. The recognize
 
 ### Improving the AI model's accuracy
 
-- If everything works well, retraining of the Deep Learning model `hand_control.py` with more larger data to improve the accuracy of the predictions.
+- If everything works well, retraining of the Deep Learning model `neural_network.py` with more larger data to improve the accuracy of the predictions.
 
 ---
 
