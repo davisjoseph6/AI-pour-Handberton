@@ -123,31 +123,31 @@ The AI receives instructions through a chat interface where the user inputs the 
 Here are the list of commands:
 
 - Intent: countdown (n) seconds.
-- Funtion: Performs a coutdown for n seconds starting from index 1. All fingers remain closed at the beginning and fingers gets extended one by one as per the value of n, staring from index 1 (thumb)
-- Note: n ranges from 1 to 5
+	- Funtion: Performs a coutdown for n seconds starting from index 1. All fingers remain closed at the beginning and fingers gets extended one by one as per the value of n, staring from index 1 (thumb)
+	- Note: n ranges from 1 to 5
 
 - Intent: (nb) +/-/*/÷ (nb) = (nb) 
-- Funtion: Performs a calculatins between n variables. All fingers remain closed at the beginning and starting from index 1, the fingers which have the value upto the index number which is of the same value as the result (nb), will open while the rest remain closed. If reslt n is equal to zeo all fingers will remain partially open.
-- Note: nb ranges from 0 to 5
+	- Funtion: Performs a calculatins between n variables. All fingers remain closed at the beginning and starting from index 1, the fingers which have the value upto the index number which is of the same value as the result (nb), will open while the rest remain closed. If reslt n is equal to zeo all fingers will remain partially open.
+	- Note: nb ranges from 0 to 5
 
 - Intent: Raise the (x) finger
-- Function: Raises finger which has the corresponds to the string variable of x . All fingers remain closed at the beginning
-- Note: x is a string variable that stands for any of the four values: "thumb" , "index" , "middle" , "ring" , "pinky"
+	- Function: Raises finger which has the corresponds to the string variable of x . All fingers remain closed at the beginning
+	- Note: x is a string variable that stands for any of the four values: "thumb" , "index" , "middle" , "ring" , "pinky"
 
 - Intent: Respond "yes" with only the thumb raised or the index finger raised questions.
-- All fingers remain closed at the begining. Only Thumb raises if the answer is yes whereas whereas all other fingers remain closed or will close if they are not. If the answer is no, Only the index raises if the answer is no whereas whereas all other fingers remain closed or will close if they are not.
-- Question string: "Are you a robot ?"
-- Answer : yes
-- Question string: "Do you have AI ?"
-- Answer : yes
-- Question string : "Are you a threat ?"
-- Answer : no
+	- All fingers remain closed at the begining. Only Thumb raises if the answer is yes whereas whereas all other fingers remain closed or will close if they are not. If the answer is no, Only the index raises if the answer is no whereas whereas all other fingers remain closed or will close if they are not.
+	- Question string: "Are you a robot ?"
+	- Answer : yes
+	- Question string: "Do you have AI ?"
+	- Answer : yes
+	- Question string : "Are you a threat ?"
+	- Answer : no
 
 - Intent: rock n roll.
-- Function: All fingers remain closed. Only the index and middle fingers are raised
+	- Function: All fingers remain closed. Only the index and middle fingers are raised
 
 - Intent: "hello"
-- Function: all fingers will open
+	- Function: all fingers will open
 
 - Intent: "goodbye"
-- Function: all fingers will close.
+	- Function: all fingers will close.
