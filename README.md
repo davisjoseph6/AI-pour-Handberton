@@ -114,7 +114,7 @@ Enter commands into the web interface to control the robotic hand. The recognize
 
 ---
 
-### The AI Project Objectives:
+### Project Objectives:
 
 AI features to the robotic hand using Tensorflow 2 and Keras. 
 
@@ -163,6 +163,6 @@ The AI model, features and their integration were designed and developed by a te
 Members of the team:
 
 - Robotics engineer: [Maël Cuny](https://github.com/maelpseudo)
-- Machine Learning engineer: [Saber Cherif](https://github.com/hakun0) - Machine Learning
+- Machine Learning engineer: [Saber Cherif](https://github.com/hakun0) 
 - Backend and Database engineer: [Alfred Gibeau--Ahoussinou](https://github.com/alfredgibeau-ahoussinou)
 - Technical Consultant: [Davis Joseph](https://github.com/davisjoseph6)
