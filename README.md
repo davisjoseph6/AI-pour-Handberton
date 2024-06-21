@@ -2,6 +2,8 @@
 
 This project integrates AI features into a robotic hand (Arduino) using TensorFlow 2 and Keras. The robotic hand is controlled via a web interface, and it responds to various commands using a neural network for intent recognition.
 
+---
+
 ## Directory Structure
 
 AI for Handberton/
