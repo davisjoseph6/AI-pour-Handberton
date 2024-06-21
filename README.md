@@ -18,8 +18,6 @@ AI for Handberton/
 │ ├── vectorizer_v2.pkl
 │ ├── hand_control.py
 
-│
-
 ├── handberton-website-proto.html
 ├── README.md
 ├── requirements.txt
