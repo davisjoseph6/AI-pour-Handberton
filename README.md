@@ -156,6 +156,13 @@ Here are the list of commands:
 - Intent: "goodbye"
 	- Function: all fingers will close.
 
-## Author
+## Authors
 
-The AI model and features and their integration were designed and developed by [Davis Joseph](https://github.com/davisjoseph6) for a robotics engineering team at [Holberton School Paris](https://www.holbertonschool.fr/campus/paris)
+The AI model, features and their integration were designed and developed by a team of robotics, machine learning, and backend engineers at [Holberton School Paris](https://www.holbertonschool.fr/campus/paris) . 
+
+Members of the team:
+
+- Robotics engineer: [Maël Cuny](https://github.com/maelpseudo)
+- Machine Learning engineer: [Saber Cherif](https://github.com/hakun0) - Machine Learning
+- Backend and Database engineer: [Alfred Gibeau--Ahoussinou](https://github.com/alfredgibeau-ahoussinou)
+- Technical Consultant: [Davis Joseph](https://github.com/davisjoseph6)
