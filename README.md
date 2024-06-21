@@ -59,7 +59,9 @@ Enter commands into the web interface to control the robotic hand. The recognize
 2. The AI Deep Learning model works but it needs to be trained more as it still makes mistakes. More testing and training data is required for the model.
 
 
-### Resume of changes to be made before testing with real Arduino
+## Resume of changes to be made
+
+### Before testing it with the real Arduino
 
 - Manually connect Arduino to computer
 
@@ -100,6 +102,8 @@ Enter commands into the web interface to control the robotic hand. The recognize
 	- Upload the Sketch
 	- Test Communication Using a Serial Monitor
 	- Verify Serial Communication
+
+### Improving the AI model's accuracy
 
 - If everything works well, retraining of the Deep Learning model `hand_control.py` with more larger data to improve the accuracy of the predictions.
 
