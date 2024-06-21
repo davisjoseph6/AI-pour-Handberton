@@ -1,12 +1,10 @@
 # Artificial Inteligence Model for Handberton (Arduino)
 
-# AI-pour-Handberton
-
 This project integrates AI features into a robotic hand (Arduino) using TensorFlow 2 and Keras. The robotic hand is controlled via a web interface, and it responds to various commands using a neural network for intent recognition.
 
 ## Directory Structure
 
-AI-pour-Handberton/
+AI for Handberton/
 │
 ├── AI/
 │ ├── intent_recognition_model.h5
@@ -61,7 +59,7 @@ Enter commands into the web interface to control the robotic hand. The recognize
 
 ----
 
-# Changes to be made before testing with the real Arduino
+## resume of changes to be made before testing with the real Arduino
 
 - Manually connect Arduino to computer
 
@@ -76,15 +74,15 @@ Enter commands into the web interface to control the robotic hand. The recognize
    ```sh
    #!/usr/bin/env python3
 
-import time
-import serial
+   import time
+   import serial
 
 
-arduino = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)  # Update the port as necessary
+   arduino = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)  # Update the port as necessary
 
-def send_to_arduino(command):
-    arduino.write((command + '\n').encode())
-    time.sleep(0.1)
+   def send_to_arduino(command):
+       arduino.write((command + '\n').encode())
+       time.sleep(0.1)
   ```
 
 - Ensure Ensure the serial port `/dev/ttyUSB0` is correct. 
@@ -109,14 +107,13 @@ def send_to_arduino(command):
 
 -------
 
-# The AI Projec Objectives:
+## The AI Project Objectives:
 
 AI features to the robotic hand using Tensorflow 2 and Keras. 
 
 The index number of thumb is 1 , index number of the index finger is 2, of the middle is 3, of the ring is 4, and of the pinky is 5. The string variable of thumb is "thumb" , index number "index", of the middle is "middle", the ring is "ring", and of the pinky is "pinky". 
 
 The value for the Flex sensor is for each finger is between 10Ω (when a finger is closed) to 30/50Ω (and when a finger is fully extended).
-
 
 The AI receives instructions through a chat interface where the user inputs the command and the finger's shoud respond automatically.
 
