@@ -110,7 +110,7 @@ Enter commands into the web interface to control the robotic hand. The recognize
 
 ---
 
-## The AI Project Objectives:
+### The AI Project Objectives:
 
 AI features to the robotic hand using Tensorflow 2 and Keras. 
 
