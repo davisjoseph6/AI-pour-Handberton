@@ -8,7 +8,6 @@ AI for Handberton/
 │
 
 ├── AI/
-
 │ ├── intent_recognition_model.h5
 │ ├── intent_recognition_model_v2.h5
 │ ├── intent_to_label.pkl
