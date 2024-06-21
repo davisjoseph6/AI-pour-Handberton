@@ -141,25 +141,12 @@
         <button id="sendCommand">Send Command</button>
     </div>
     <script>
-        let port;
-        let writer;
         let isConnected = false;
 
-        document.getElementById('connect').addEventListener('click', async () => {
-            if ('serial' in navigator) {
-                try {
-                    port = await navigator.serial.requestPort();
-                    await port.open({ baudRate: 9600 });
-                    writer = port.writable.getWriter();
-                    isConnected = true;
-                    updateStatus('Connected to Arduino');
-                } catch (error) {
-                    console.error('Error connecting to Arduino:', error);
-                    updateStatus('Connection failed: ' + error.message);
-                }
-            } else {
-                updateStatus('Web Serial API not supported.');
-            }
+        document.getElementById('connect').addEventListener('click', () => {
+            // Simulate connection to Arduino
+            isConnected = true;
+            updateStatus('Connected to Arduino (Mock)');
         });
 
         document.getElementById('startCalibration').addEventListener('click', () => {
@@ -181,31 +168,25 @@
         });
 
         function sendCommand(command) {
-            if (isConnected && writer) {
-                try {
-                    const encoder = new TextEncoder();
-                    const data = encoder.encode(command + '\n');
-                    writer.write(data);
-                    updateStatus('Command sent: ' + command);
-                } catch (error) {
-                    console.error('Error sending command:', error);
-                    updateStatus('Send failed: ' + error.message);
-                }
+            if (isConnected) {
+                // Directly send the command to the server for processing
+                fetch('/process_command', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ command })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    updateStatus(`Command sent: ${command}, Response: ${data.intent}`);
+                })
+                .catch(error => console.error('Error:', error));
+            } else {
+                updateStatus('Not connected to Arduino');
             }
         }
 
         function sendCalibrateCommand(command) {
-            if (isConnected && writer) {
-                try {
-                    const encoder = new TextEncoder();
-                    const data = encoder.encode(command + '\n');
-                    writer.write(data);
-                    updateStatus('Calibrate command sent: ' + command);
-                } catch (error) {
-                    console.error('Error sending calibrate command:', error);
-                    updateStatus('Send failed: ' + error.message);
-                }
-            }
+            sendCommand(command);
         }
 
         function updateStatus(message) {
