@@ -124,37 +124,97 @@ The value for the Flex sensor is for each finger is between 10Ω (when a finger 
 
 The AI receives instructions through a chat interface where the user inputs the command and the finger's shoud respond automatically.
 
-Here are the list of commands:
+### Questions to ask the AI
 
-- Intent: countdown (n) seconds.
-	- Funtion: Performs a coutdown for n seconds starting from index 1. All fingers remain closed at the beginning and fingers gets extended one by one as per the value of n, staring from index 1 (thumb)
-	- Note: n ranges from 1 to 5
+Here's a comprehensive list of intents with specifics and details for each intent. These intents are recognized by the intent recognition model and the corresponding actions they trigger in the hand control system.
 
-- Intent: (nb) +/-/*/÷ (nb) = (nb) 
-	- Funtion: Performs a calculatins between n variables. All fingers remain closed at the beginning and starting from index 1, the fingers which have the value upto the index number which is of the same value as the result (nb), will open while the rest remain closed. If reslt n is equal to zeo all fingers will remain partially open.
-	- Note: nb ranges from 0 to 5
+#### Intents and their Specifics
+1. countdown
 
-- Intent: Raise the (x) finger
-	- Function: Raises finger which has the corresponds to the string variable of x . All fingers remain closed at the beginning
-	- Note: x is a string variable that stands for any of the four values: "thumb" , "index" , "middle" , "ring" , "pinky"
+- Description: Starts a countdown where each second is indicated by the movement of fingers.
+- Example Commands:
+	- "countdown 5 seconds"
+	- "countdown 3 seconds"
+	- "countdown 1 second"
+- Action: Each second, a finger is opened and closed in sequence.
 
-- Intent: Respond "yes" with only the thumb raised or "no" with only the index finger raised for questions. All fingers remain closed at the begining. 
-- Only Thumb raises if the answer is yes whereas whereas all other fingers remain closed or will close if they are not. If the answer is no, Only the index raises if the answer is no whereas whereas all other fingers remain closed or will close if they are not.
-	- Question string: "Are you a robot ?"
-	- Answer : yes
-	- Question string: "Do you have AI ?"
-	- Answer : yes
-	- Question string : "Are you a threat ?"
-	- Answer : no
+2. calculate
 
-- Intent: rock n roll.
-	- Function: All fingers remain closed. Only the index and middle fingers are raised
+- Description: Evaluates a simple arithmetic expression and indicates the result using finger movements.
+- Example Commands:
+	- "calculate 2 + 3"
+	- "calculate 4 * 5"
+	- "calculate 6 - 2"
+- Action: The result is shown by opening a corresponding number of fingers (up to 5).
 
-- Intent: "hello"
-	- Function: all fingers will open
+3. raise_finger
 
-- Intent: "goodbye"
-	- Function: all fingers will close.
+- Description: Raises a specified finger.
+- Example Commands:
+	- "raise the thumb finger"
+	- "raise the index finger"
+- Action: The specified finger is raised (opened).
+
+4. respond_to_question
+
+- Description: Responds to predefined questions by moving specific fingers.
+- Example Commands:
+	- "Are you a robot?"
+	- "Do you have AI?"
+	- "Are you a threat?"
+- Action: Moves a specific finger (thumb for "yes" responses, index for "no" responses).
+
+5. rock_n_roll
+
+- Description: Performs a "rock n roll" gesture.
+- Example Commands:
+	- "rock n roll"
+- Action: Closes all fingers and opens the index and middle fingers.
+
+6. hello
+
+- Description: Performs a waving gesture as a greeting.
+- Example Commands:
+	- "hello"
+- Action: Opens all fingers.
+
+7. goodbye
+
+ - Description: Closes all fingers as a farewell gesture.
+- Example Commands:
+	- "goodbye"
+	- "bye bye"
+- Action: Closes all fingers.
+
+#### Command Processing
+- countdown: Extracts the number of seconds from the command and calls the countdown(seconds) function.
+- calculate: Extracts the arithmetic expression from the command and calls the calculate(expression) function.
+- raise_finger: Extracts the finger name from the command and calls the raise_finger(finger) function.
+- respond_to_question: Identifies the question from the command and calls the respond_to_question(question) function.
+- rock_n_roll: Calls the rock_n_roll() function.
+- hello: Calls the hello() function.
+- goodbye: Calls the goodbye() function.
+  
+#### Implementation Details
+Intent Recognition Model
+- Model Architecture:
+	- Input Layer: Dense layer with 128 units and ReLU activation.
+	- Hidden Layers: Dense layers with 64 and 32 units with ReLU activation.
+	- Output Layer: Dense layer with softmax activation for intent classification.
+	- Dropout Layer: Dropout rate of 0.5 for regularization.
+- Data Preparation:
+	- Commands are tokenized and vectorized using TF-IDF.
+	- Intent labels are encoded as categorical values.
+	- Data is split into training and testing sets.
+Flask API
+- Endpoint: /process_command
+- Request: JSON payload with the command.
+- Response: JSON with the predicted intent and the original command.
+- Processing:
+	- Transforms the command using the loaded vectorizer.
+	- Predicts the intent using the loaded model.
+	- Executes the corresponding hand control function based on the predicted intent.
+This setup allows the system to understand a range of commands, classify them into predefined intents, and perform specific actions with the robotic hand accordingly.
 
 ## Authors
 
