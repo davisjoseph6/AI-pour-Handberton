@@ -136,8 +136,7 @@ Here are the list of commands:
 	- Function: Raises finger which has the corresponds to the string variable of x . All fingers remain closed at the beginning
 	- Note: x is a string variable that stands for any of the four values: "thumb" , "index" , "middle" , "ring" , "pinky"
 
-- Intent: Respond "yes" with only the thumb raised or the index finger raised questions.
-	- All fingers remain closed at the begining. Only Thumb raises if the answer is yes whereas whereas all other fingers remain closed or will close if they are not. If the answer is no, Only the index raises if the answer is no whereas whereas all other fingers remain closed or will close if they are not.
+- Intent: Respond "yes" with only the thumb raised or "no" with only the index finger raised for questions. All fingers remain closed at the begining. Only Thumb raises if the answer is yes whereas whereas all other fingers remain closed or will close if they are not. If the answer is no, Only the index raises if the answer is no whereas whereas all other fingers remain closed or will close if they are not.
 	- Question string: "Are you a robot ?"
 	- Answer : yes
 	- Question string: "Do you have AI ?"
