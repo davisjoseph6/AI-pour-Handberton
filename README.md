@@ -2,7 +2,7 @@
 
 # AI-pour-Handberton
 
-This project integrates AI features into a robotic hand using TensorFlow 2 and Keras. The robotic hand is controlled via a web interface, and it responds to various commands using a neural network for intent recognition.
+This project integrates AI features into a robotic hand (Arduino) using TensorFlow 2 and Keras. The robotic hand is controlled via a web interface, and it responds to various commands using a neural network for intent recognition.
 
 ## Directory Structure
 
@@ -44,7 +44,10 @@ AI-pour-Handberton/
     ```
 
 4. **Open the Web Interface**:
-    Open `handberton-website-proto.html` in a web browser.
+    Navigate to `http://localhost:8000` in a web browser.
+
+5. **Click Connect to Arduino**:
+
 
 ## Usage
 
@@ -52,35 +55,46 @@ Enter commands into the web interface to control the robotic hand. The recognize
 
 ---------------------
 
-#NOTE - please make these changes
+# NOTE
+
+1. For now, it works well with the mock signal. Some breif changes required before testing with actual Arduino
+
+2. The AI Deep Learning model works but it needs to be trained more as it still makes mistakes. More testing and training data is required for the model.
 
 ----
-Connect Arduino to computer
 
+# Changes to be made before testing with the real Arduino
+
+Manually connect Arduino to computer
+
+   ```sh
 ls ls /dev/tty*
+  ```
 
 --------
-Update the hand_control.py after connecting the arduino 
+Update the `hand_control.py` after connecting the arduino 
 
 --
 
 replace
 
-# Use the MockArduino class instead of serial.Serial
+    ```sh
+ # Use the MockArduino class instead of serial.Serial"
 arduino = MockArduino()
 
 def send_to_arduino(command):
     arduino.write(command + '\n')
     time.sleep(0.1)
+  ```
 
---
 
 with
 
-# Establish a serial connection to the Arduino
+    ```sh
+ # Establish a serial connection to the Arduino"
 
 arduino = serial.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=.1)
-
+    
 
 
 def send_to_arduino(command):
@@ -88,11 +102,13 @@ def send_to_arduino(command):
     arduino.write(bytes(command + '\n', 'utf-8'))
 
     time.sleep(0.1)
+  ```
 
 ----
 
 verify serial communication
 
+    ```sh
 void setup() {
   Serial.begin(9600);
   pinMode(LED_BUILTIN, OUTPUT);
@@ -109,14 +125,19 @@ void loop() {
     // Add more commands as needed
   }
 }
+  ```
 
 -------
 
 test it
 
+    ```sh
 ./hand_control.py
+  ```
 
 if the test is successful, update the app.py with the changes:
+
+    ```sh
 line 1 from flask import Flask, request, jsonify, send_from_directory
 line 7: app = Flask(__name__, static_url_path='')
 line 18: 
@@ -125,14 +146,9 @@ line 18:
 def index():
 
     return send_from_directory('', 'handberton-website-proto.html')
-
+  ```
 
 -------------------------
-
-
-
-pip install tensorflow pandas scikit-learn nltk
-pip install pyserial
 
 AI features to the robotic hand using Tensorflow 2 and Keras. 
 
@@ -145,32 +161,32 @@ The AI receives instructions through a chat interface where the user inputs the 
 
 Here are the list of commands:
 
-Intent: countdown (n) seconds. 
-Funtion: Performs a coutdown for n seconds starting from index 1. All fingers remain closed at the beginning and fingers gets extended one by one as per the value of n, staring from index 1 (thumb)
-Note: n ranges from 1 to 5
+- Intent: countdown (n) seconds.
+- Funtion: Performs a coutdown for n seconds starting from index 1. All fingers remain closed at the beginning and fingers gets extended one by one as per the value of n, staring from index 1 (thumb)
+- Note: n ranges from 1 to 5
 
-Intent: (nb) +/-/*/÷ (nb) = (nb) 
-Funtion: Performs a calculatins between n variables. All fingers remain closed at the beginning and starting from index 1, the fingers which have the value upto the index number which is of the same value as the result (nb), will open while the rest remain closed. If reslt n is equal to zeo all fingers will remain partially open.
-Note: nb ranges from 0 to 5
+- Intent: (nb) +/-/*/÷ (nb) = (nb) 
+- Funtion: Performs a calculatins between n variables. All fingers remain closed at the beginning and starting from index 1, the fingers which have the value upto the index number which is of the same value as the result (nb), will open while the rest remain closed. If reslt n is equal to zeo all fingers will remain partially open.
+- Note: nb ranges from 0 to 5
 
-Intent: Raise the (x) finger
-Function: Raises finger which has the corresponds to the string variable of x . All fingers remain closed at the beginning
-Note: x is a string variable that stands for any of the four values: "thumb" , "index" , "middle" , "ring" , "pinky"
+- Intent: Raise the (x) finger
+- Function: Raises finger which has the corresponds to the string variable of x . All fingers remain closed at the beginning
+- Note: x is a string variable that stands for any of the four values: "thumb" , "index" , "middle" , "ring" , "pinky"
 
-Intent: Respond "yes" with only the thumb raised or the index finger raised questions.
-All fingers remain closed at the begining. Only Thumb raises if the answer is yes whereas whereas all other fingers remain closed or will close if they are not. If the answer is no, Only the index raises if the answer is no whereas whereas all other fingers remain closed or will close if they are not.
-Question string: "Are you a robot ?"
-Answer : yes
-Question string: "Do you have AI ?"
-Answer : yes
-Question string : "Are you a threat ?"
-Answer : no
+- Intent: Respond "yes" with only the thumb raised or the index finger raised questions.
+- All fingers remain closed at the begining. Only Thumb raises if the answer is yes whereas whereas all other fingers remain closed or will close if they are not. If the answer is no, Only the index raises if the answer is no whereas whereas all other fingers remain closed or will close if they are not.
+- Question string: "Are you a robot ?"
+- Answer : yes
+- Question string: "Do you have AI ?"
+- Answer : yes
+- Question string : "Are you a threat ?"
+- Answer : no
 
-Intent: rock n roll.
-Function: All fingers remain closed. Only the index and middle fingers are raised
+- Intent: rock n roll.
+- Function: All fingers remain closed. Only the index and middle fingers are raised
 
-Intent: "hello"
-Function: all fingers will open
+- Intent: "hello"
+- Function: all fingers will open
 
-Intent: "goodbye"
-Function: all fingers will close.
+- Intent: "goodbye"
+- Function: all fingers will close.

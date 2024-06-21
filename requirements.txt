@@ -3,4 +3,4 @@ tensorflow
 scikit-learn
 nltk
 pyserial
-
+pandas
