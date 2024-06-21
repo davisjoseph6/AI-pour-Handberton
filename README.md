@@ -158,4 +158,4 @@ Here are the list of commands:
 
 ## Author
 
-The AI model and features and their integration were designed and developed by [Davis Joseph](https://github.com/davisjoseph6) for a robotics engineering team.
+The AI model and features and their integration were designed and developed by [Davis Joseph](https://github.com/davisjoseph6) for a robotics engineering team at [Holberton School Paris](https://www.holbertonschool.fr/campus/paris)
