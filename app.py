@@ -3,7 +3,7 @@
 import sys
 sys.path.append('./AI')  # Add this line to include the AI directory in the module search path
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from tensorflow.keras.models import load_model
 import pickle
 import re
@@ -20,15 +20,23 @@ with open('AI/intent_to_label_v2.pkl', 'rb') as f:
 
 label_to_intent = {v: k for k, v in intent_to_label.items()}
 
+@app.route('/')
+def serve_html():
+    return send_from_directory('.', 'handberton-website-proto.html')
+
 @app.route('/process_command', methods=['POST'])
 def process_command():
     data = request.json
     command = data['command']
     
+    print(f"Received command: {command}")
+
     X = vectorizer.transform([command]).toarray()
     prediction = model.predict(X)
     intent_label = prediction.argmax()
     intent = label_to_intent[intent_label]
+
+    print(f"Predicted intent: {intent}")
 
     if intent == 'countdown':
         seconds = int(re.search(r'\d+', command).group())
@@ -51,5 +59,5 @@ def process_command():
     return jsonify({'intent': intent, 'command': command})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=8000, debug=True)
 

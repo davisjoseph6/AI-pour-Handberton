@@ -155,31 +155,41 @@
 
         document.getElementById('sendCommand').addEventListener('click', () => {
             const command = document.getElementById('commandInput').value;
-            fetch('/process_command', {
+            console.log(`Sending command: ${command}`);
+            fetch('http://localhost:8000/process_command', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ command })
             })
             .then(response => response.json())
             .then(data => {
+                console.log(`Received response: ${JSON.stringify(data)}`);
                 updateStatus(`Intent: ${data.intent}, Command: ${data.command}`);
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                console.error('Error:', error);
+                updateStatus(`Error: ${error.message}`);
+            });
         });
 
         function sendCommand(command) {
             if (isConnected) {
                 // Directly send the command to the server for processing
-                fetch('/process_command', {
+                console.log(`Command sent: ${command}`);
+                fetch('http://localhost:8000/process_command', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ command })
                 })
                 .then(response => response.json())
                 .then(data => {
+                    console.log(`Command processed: ${command}, Response: ${data.intent}`);
                     updateStatus(`Command sent: ${command}, Response: ${data.intent}`);
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+                    console.error('Error:', error);
+                    updateStatus(`Error: ${error.message}`);
+                });
             } else {
                 updateStatus('Not connected to Arduino');
             }

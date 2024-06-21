@@ -138,7 +138,7 @@ AI features to the robotic hand using Tensorflow 2 and Keras.
 
 The index number of thumb is 1 , index number of the index finger is 2, of the middle is 3, of the ring is 4, and of the pinky is 5. The string variable of thumb is "thumb" , index number "index", of the middle is "middle", the ring is "ring", and of the pinky is "pinky". 
 
-The Flex sensor is for each finger is between 10Ω ( when a finger is closed) to 30/50Ω (and when a finger is fully extended)
+The Flex sensor is for each finger is between 10Ω ( when a finger is closed) to 30/50Ω (and when a finger is fully extended).
 
 
 The AI receives instructions through a chat interface where the user inputs the command and the finger's shoud respond automatically.
