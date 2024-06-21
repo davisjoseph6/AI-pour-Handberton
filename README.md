@@ -79,7 +79,7 @@ Enter commands into the web interface to control the robotic hand. The recognize
 import time
 import serial
 
-# Initialize serial connection to Arduino
+
 arduino = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)  # Update the port as necessary
 
 def send_to_arduino(command):
