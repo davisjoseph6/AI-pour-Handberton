@@ -165,4 +165,7 @@ Members of the team:
 - Robotics engineer: [Maël Cuny](https://github.com/maelpseudo)
 - Machine Learning engineer: [Saber Cherif](https://github.com/hakun0) 
 - Backend and Database engineer: [Alfred Gibeau--Ahoussinou](https://github.com/alfredgibeau-ahoussinou)
-- Technical Consultant: [Davis Joseph](https://github.com/davisjoseph6)
+
+Advisors, Consultants and sponsors:
+
+- Machine Learning and Deep Learning Consultant: [Davis Joseph](https://github.com/davisjoseph6)
