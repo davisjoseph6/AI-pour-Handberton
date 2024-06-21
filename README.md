@@ -45,7 +45,7 @@ AI for Handberton/
 4. **Open the Web Interface**:
     Navigate to `http://localhost:8000` in a web browser.
 
-5. **Click Connect to Arduino**
+5. **Click `Connect to Arduino`**
 
 
 ## Usage
