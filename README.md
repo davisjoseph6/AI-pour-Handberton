@@ -1,4 +1,4 @@
-# Intelligence artificielle pour Handberton
+# Artificial Inteligence Model for Handberton (Arduino)
 
 # AI-pour-Handberton
 
@@ -63,94 +63,59 @@ Enter commands into the web interface to control the robotic hand. The recognize
 
 # Changes to be made before testing with the real Arduino
 
-Manually connect Arduino to computer
+- Manually connect Arduino to computer
+
 
    ```sh
    ls /dev/tty*
   ```
 
---------
-Update the `hand_control.py` after connecting the arduino 
+- Update the `hand_control.py`  
 
---
 
-replace
+   ```sh
+   #!/usr/bin/env python3
 
-    ```sh
-  arduino = MockArduino()
+import time
+import serial
+
+# Initialize serial connection to Arduino
+arduino = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)  # Update the port as necessary
 
 def send_to_arduino(command):
-    arduino.write(command + '\n')
+    arduino.write((command + '\n').encode())
     time.sleep(0.1)
   ```
 
+- Ensure Ensure the serial port `/dev/ttyUSB0` is correct. 
 
-with
+   ```sh
+   ls /dev/tty*
+  ```
 
-    ```sh
- arduino = serial.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=.1)
+- Identify the correct port for your Arduino (it could be /dev/ttyUSB0, /dev/ttyACM0, etc.) and update the serial.Serial line in `hand_control.py` accordingly.
+
+- Update app.py if necessary
+
+- (Optional) Verify serial communication: 
+	- Upload a simple Arduino sketch to your Arduino board to verify the communication. This sketch will send and receive data over the serial port.
+	- Upload the Sketch
+	- Test Communication Using a Serial Monitor
+	- Verify Serial Communication
+
+- If everything works well, retraining of the Deep Learning model `hand_control.py` with more larger data to improve the accuracy of the predictions.
+
     
-
-
-def send_to_arduino(command):
-
-    arduino.write(bytes(command + '\n', 'utf-8'))
-
-    time.sleep(0.1)
-  ```
-
-----
-
-verify serial communication
-
-    ```sh
-void setup() {
-  Serial.begin(9600);
-  pinMode(LED_BUILTIN, OUTPUT);
-}
-
-void loop() {
-  if (Serial.available() > 0) {
-    String command = Serial.readStringUntil('\n');
-    if (command == "finger1:open") {
-      digitalWrite(LED_BUILTIN, HIGH); // Turn the LED on
-    } else if (command == "finger1:close") {
-      digitalWrite(LED_BUILTIN, LOW); // Turn the LED off
-    }
-    // Add more commands as needed
-  }
-}
-
-  ```
 
 -------
 
-test it
-
-    ```sh
-./hand_control.py
-  ```
-
-if the test is successful, update the app.py with the changes:
-
-    ```sh
-line 1 from flask import Flask, request, jsonify, send_from_directory
-line 7: app = Flask(__name__, static_url_path='')
-line 18: 
-@app.route('/')
-
-def index():
-
-    return send_from_directory('', 'handberton-website-proto.html')
-  ```
-
--------------------------
+# The AI Projec Objectives:
 
 AI features to the robotic hand using Tensorflow 2 and Keras. 
 
 The index number of thumb is 1 , index number of the index finger is 2, of the middle is 3, of the ring is 4, and of the pinky is 5. The string variable of thumb is "thumb" , index number "index", of the middle is "middle", the ring is "ring", and of the pinky is "pinky". 
 
-The Flex sensor is for each finger is between 10Ω ( when a finger is closed) to 30/50Ω (and when a finger is fully extended).
+The value for the Flex sensor is for each finger is between 10Ω (when a finger is closed) to 30/50Ω (and when a finger is fully extended).
 
 
 The AI receives instructions through a chat interface where the user inputs the command and the finger's shoud respond automatically.
