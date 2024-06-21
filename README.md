@@ -49,10 +49,12 @@ AI for Handberton/
 
 Enter commands into the web interface to control the robotic hand. The recognized intents will be processed, and the corresponding actions will be sent to the Arduino to control the hand's movements.
 
-# NOTE:
 ---
 
-1. For now, it works well with the mock signal. Some breif changes required before testing with actual Arduino
+# NOTE:
+
+
+1. For now, it works well with the mock signal. A few changes required before testing with actual Arduino.
 
 2. The AI Deep Learning model works but it needs to be trained more as it still makes mistakes. More testing and training data is required for the model.
 
