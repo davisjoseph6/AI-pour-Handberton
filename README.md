@@ -151,3 +151,7 @@ Here are the list of commands:
 
 - Intent: "goodbye"
 	- Function: all fingers will close.
+
+## Author
+
+The AI model and features and their integration were designed and developed by [Davis Joseph](https://github.com/davisjoseph6) for a robotics engineering team.
