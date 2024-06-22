@@ -120,7 +120,6 @@ Here's a comprehensive list of intents with specifics and details for each inten
 
 #### Intents and their Specifics
 1. countdown
-
 - Description: Starts a countdown where each second is indicated by the movement of fingers.
 - Example Commands:
 	- "countdown 5 seconds"
@@ -129,7 +128,6 @@ Here's a comprehensive list of intents with specifics and details for each inten
 - Action: Each second, a finger is opened and closed in sequence.
 
 2. calculate
-
 - Description: Evaluates a simple arithmetic expression and indicates the result using finger movements.
 - Example Commands:
 	- "calculate 2 + 3"
@@ -138,7 +136,6 @@ Here's a comprehensive list of intents with specifics and details for each inten
 - Action: The result is shown by opening a corresponding number of fingers (up to 5).
 
 3. raise_finger
-
 - Description: Raises a specified finger.
 - Example Commands:
 	- "raise the thumb finger"
@@ -146,7 +143,6 @@ Here's a comprehensive list of intents with specifics and details for each inten
 - Action: The specified finger is raised (opened).
 
 4. respond_to_question
-
 - Description: Responds to predefined questions by moving specific fingers.
 - Example Commands:
 	- "Are you a robot?"
@@ -155,22 +151,19 @@ Here's a comprehensive list of intents with specifics and details for each inten
 - Action: Moves a specific finger (thumb for "yes" responses, index for "no" responses).
 
 5. rock_n_roll
-
 - Description: Performs a "rock n roll" gesture.
 - Example Commands:
 	- "rock n roll"
 - Action: Closes all fingers and opens the index and middle fingers.
 
 6. hello
-
 - Description: Performs a waving gesture as a greeting.
 - Example Commands:
 	- "hello"
 - Action: Opens all fingers.
 
 7. goodbye
-
- - Description: Closes all fingers as a farewell gesture.
+- Description: Closes all fingers as a farewell gesture.
 - Example Commands:
 	- "goodbye"
 	- "bye bye"
@@ -187,13 +180,7 @@ Here's a comprehensive list of intents with specifics and details for each inten
 
 ## About the Project:
 
-AI features to the robotic hand using Tensorflow 2 and Keras. 
-
-The index number of thumb is 1 , index number of the index finger is 2, of the middle is 3, of the ring is 4, and of the pinky is 5. The string variable of thumb is "thumb" , index number "index", of the middle is "middle", the ring is "ring", and of the pinky is "pinky". 
-
-The value for the Flex sensor is for each finger is between 10Ω (when a finger is closed) to 30/50Ω (and when a finger is fully extended).
-
-The AI receives instructions through a chat interface where the user inputs the command and the finger's shoud respond automatically.
+AI features to the robotic hand using Tensorflow 2 and Keras. The index number of thumb is 1 , index number of the index finger is 2, of the middle is 3, of the ring is 4, and of the pinky is 5. The string variable of thumb is "thumb" , index number "index", of the middle is "middle", the ring is "ring", and of the pinky is "pinky". The value for the Flex sensor is for each finger is between 10Ω (when a finger is closed) to 30/50Ω (and when a finger is fully extended). The AI receives instructions through a chat interface where the user inputs the command and the finger's shoud respond automatically.
 
 ### Implementation Details
 Intent Recognition Model
