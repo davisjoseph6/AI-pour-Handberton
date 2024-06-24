@@ -1,0 +1,182 @@
+/* gestion.css */
+
+/* Variables for easy customization */
+:root {
+    --primary-color: #8e948e;
+    --primary-color-hover: #b11c1c;
+    --background-color: #f7f7f7;
+    --panel-background-color: white;
+    --panel-padding: 20px;
+    --panel-radius: 8px;
+    --panel-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --button-padding: 10px 20px;
+    --button-radius: 4px;
+    --button-font-size: 16px;
+    --input-padding: 10px;
+    --input-border: 1px solid #ccc;
+    --input-radius: 4px;
+    --input-font-size: 16px;
+    --status-color-disconnected: red;
+    --status-color-connected: green;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 20px;
+}
+
+h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: var(--button-padding);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: var(--button-font-size);
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: var(--button-radius);
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--primary-color-hover);
+}
+
+.calibration-panel, .control-panel, .command-panel {
+    background-color: var(--panel-background-color);
+    padding: var(--panel-padding);
+    margin-bottom: 20px;
+    border-radius: var(--panel-radius);
+    box-shadow: var(--panel-shadow);
+}
+
+.motor-controls {
+    display: flex;
+    flex-direction: column;
+}
+
+.motor-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.motor-control div {
+    display: flex;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    gap: 5px;
+}
+
+button.up, button.down {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    line-height: 1;
+    padding: 0;
+}
+
+.status {
+    font-weight: bold;
+    color: var(--status-color-disconnected);
+    margin-top: 10px;
+}
+
+#status.connected {
+    color: var(--status-color-connected);
+}
+
+#commandInput {
+    width: calc(100% - 22px); /* Adjust width to fit within padding */
+    padding: var(--input-padding);
+    font-size: var(--input-font-size);
+    border: var(--input-border);
+    border-radius: var(--input-radius);
+    box-sizing: border-box;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .calibration-panel, .control-panel, .command-panel {
+        padding: 15px;
+    }
+
+    .motor-control {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .buttons {
+        margin-top: 10px;
+        gap: 3px;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 14px;
+        margin: 3px 1px;
+    }
+
+    button.up, button.down {
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+    }
+
+    #commandInput {
+        width: calc(100% - 18px);
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .calibration-panel, .control-panel, .command-panel {
+        padding: 10px;
+    }
+
+    button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    button.up, button.down {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+
+    #commandInput {
+        width: calc(100% - 16px);
+        padding: 6px;
+        font-size: 12px;
+    }
+
+    .motor-control {
+        padding: 8px;
+    }
+
+    .buttons {
+        margin-top: 8px;
+    }
+}
