@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href = "gestion.css">
+    <link rel="stylesheet" href="/static/css/gestion.css">
     <title>Control Panel</title>
 </head>
 <body>
@@ -73,69 +73,6 @@
         <input type="text" id="commandInput" placeholder="Enter command" style="width: 100%; padding: 10px; margin-bottom: 10px;">
         <button id="sendCommand">Send Command</button>
     </div>
-    <script>
-        let isConnected = false;
-
-        document.getElementById('connect').addEventListener('click', () => {
-            // Simulate connection to Arduino
-            isConnected = true;
-            updateStatus('Connected to Arduino (Mock)');
-        });
-
-        document.getElementById('startCalibration').addEventListener('click', () => {
-            sendCommand('startCalibration');
-        });
-
-        document.getElementById('sendCommand').addEventListener('click', () => {
-            const command = document.getElementById('commandInput').value;
-            console.log(`Sending command: ${command}`);
-            fetch('http://localhost:8000/process_command', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ command })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(`Received response: ${JSON.stringify(data)}`);
-                updateStatus(`Intent: ${data.intent}, Command: ${data.command}`);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                updateStatus(`Error: ${error.message}`);
-            });
-        });
-
-        function sendCommand(command) {
-            if (isConnected) {
-                // Directly send the command to the server for processing
-                console.log(`Command sent: ${command}`);
-                fetch('http://localhost:8000/process_command', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ command })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(`Command processed: ${command}, Response: ${data.intent}`);
-                    updateStatus(`Command sent: ${command}, Response: ${data.intent}`);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    updateStatus(`Error: ${error.message}`);
-                });
-            } else {
-                updateStatus('Not connected to Arduino');
-            }
-        }
-
-        function sendCalibrateCommand(command) {
-            sendCommand(command);
-        }
-
-        function updateStatus(message) {
-            document.getElementById('status').textContent = message;
-        }
-    </script>
+    <script src="/static/js/main.js"></script>
 </body>
 </html>
-
