@@ -2,12 +2,13 @@
 
 import time
 from mock_arduino import MockArduino
+import serial
 
 # Use the MockArduino class instead of serial.Serial
-arduino = MockArduino()
+arduino = serial.Serial('/dev/tty.usbmodem1101', 9600, timeout=1)  # Update the port as necessary
 
 def send_to_arduino(command):
-    arduino.write(command + '\n')
+    arduino.write((command + '\n').encode())
     time.sleep(0.1)
 
 def countdown(seconds):
