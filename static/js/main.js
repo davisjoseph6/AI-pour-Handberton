@@ -119,4 +119,3 @@ async function readSerialData() {
 function updateStatus(message) {
     document.getElementById('status').textContent = message;
 }
-
