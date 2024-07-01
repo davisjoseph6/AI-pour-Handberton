@@ -1,9 +1,7 @@
-/* gestion.css */
-
 /* Variables for easy customization */
 :root {
-    --primary-color: #8e948e;
-    --primary-color-hover: #b11c1c;
+    --primary-color: #848684;
+    --primary-color-hover: #666666;
     --background-color: #f7f7f7;
     --panel-background-color: white;
     --panel-padding: 20px;
@@ -16,22 +14,110 @@
     --input-border: 1px solid #ccc;
     --input-radius: 4px;
     --input-font-size: 16px;
-    --status-color-disconnected: red;
     --status-color-connected: green;
+    --status-color-disconnected: rgb(133, 130, 130);
 }
 
+/* General styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     background-color: var(--background-color);
     margin: 0;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
 
+header {
+    background-color: var(--primary-color);
+    padding: 10px 0;
+    color: white;
+    width: 100%;
+    box-shadow: var(--panel-shadow);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-logo img {
+    max-width: 100px;
+    height: auto;
+}
+
+/* Navbar styles */
+.navbar-menu {
+    display: flex;
+}
+
+.navbar-menu .nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-menu .nav-item {
+    position: relative;
+    margin-left: 20px;
+}
+
+.navbar-menu .nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-menu .nav-link:hover {
+    background-color: var(--primary-color-hover);
+    border-radius: 4px;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--primary-color);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: var(--panel-shadow);
+    border-radius: var(--button-radius);
+}
+
+.dropdown-link {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-link:hover {
+    background-color: var(--primary-color-hover);
+}
+
+.nav-item:hover .dropdown {
+    display: block;
+}
+
+/* Typography */
 h3 {
     color: #333;
     margin-bottom: 10px;
 }
 
+/* Button styles */
 button {
     background-color: var(--primary-color);
     color: white;
@@ -51,14 +137,38 @@ button:hover {
     background-color: var(--primary-color-hover);
 }
 
-.calibration-panel, .control-panel, .command-panel {
+/* Panel styles */
+.calibration-panel,
+.control-panel,
+.command-panel {
     background-color: var(--panel-background-color);
     padding: var(--panel-padding);
     margin-bottom: 20px;
     border-radius: var(--panel-radius);
     box-shadow: var(--panel-shadow);
+    flex-basis: 33%; /* Chaque panneau occupe un tiers de la largeur */
+    height: 100%; /* Chaque panneau prend toute la hauteur disponible */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
+.command-panel {
+    margin-left: 20px; /* Espacement entre les panneaux */
+}
+
+/* Flex container for horizontal layout */
+.main-container {
+    display: flex;
+    flex-direction: row; /* Afficher les panneaux côte à côte */
+    gap: 20px;
+    align-items: stretch; /* Tous les panneaux ont la même hauteur */
+    justify-content: center; /* Centrer horizontalement */
+    width: 100%;
+    max-width: 1200px; /* Largeur maximale pour éviter l'étirement sur les grands écrans */
+}
+
+/* Motor control styles */
 .motor-controls {
     display: flex;
     flex-direction: column;
@@ -84,7 +194,8 @@ button:hover {
     gap: 5px;
 }
 
-button.up, button.down {
+button.up,
+button.down {
     width: 40px;
     height: 40px;
     font-size: 24px;
@@ -92,6 +203,14 @@ button.up, button.down {
     padding: 0;
 }
 
+/* Align buttons */
+button.ouvrir,
+button.fermer {
+    width: 100px;
+    text-align: center;
+}
+
+/* Status styles */
 .status {
     font-weight: bold;
     color: var(--status-color-disconnected);
@@ -102,8 +221,9 @@ button.up, button.down {
     color: var(--status-color-connected);
 }
 
+/* Command input styles */
 #commandInput {
-    width: calc(100% - 22px); /* Adjust width to fit within padding */
+    width: calc(100% - 22px);
     padding: var(--input-padding);
     font-size: var(--input-font-size);
     border: var(--input-border);
@@ -117,8 +237,39 @@ button.up, button.down {
         padding: 10px;
     }
 
-    .calibration-panel, .control-panel, .command-panel {
+    .header .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-menu {
+        width: 100%;
+    }
+
+    .navbar-menu .nav {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .navbar-menu .nav-item {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .dropdown {
+        position: static;
+        box-shadow: none;
+    }
+
+    .calibration-panel,
+    .control-panel,
+    .command-panel {
         padding: 15px;
+        max-width: 100%; /* Pour s'assurer qu'ils prennent toute la largeur sur les petits écrans */
+    }
+
+    .main-container {
+        flex-direction: column; /* Afficher en colonne pour les petits écrans */
     }
 
     .motor-control {
@@ -137,10 +288,16 @@ button.up, button.down {
         margin: 3px 1px;
     }
 
-    button.up, button.down {
+    button.up,
+    button.down {
         width: 36px;
         height: 36px;
         font-size: 20px;
+    }
+
+    button.ouvrir,
+    button.fermer {
+        width: 90px;
     }
 
     #commandInput {
@@ -151,7 +308,13 @@ button.up, button.down {
 }
 
 @media (max-width: 480px) {
-    .calibration-panel, .control-panel, .command-panel {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .calibration-panel,
+    .control-panel,
+    .command-panel {
         padding: 10px;
     }
 
@@ -160,10 +323,16 @@ button.up, button.down {
         font-size: 12px;
     }
 
-    button.up, button.down {
+    button.up,
+    button.down {
         width: 32px;
         height: 32px;
         font-size: 18px;
+    }
+
+    button.ouvrir,
+    button.fermer {
+        width: 80px;
     }
 
     #commandInput {
@@ -180,3 +349,19 @@ button.up, button.down {
         margin-top: 8px;
     }
 }
+
+/* Styles pour aligner les boutons */
+.panel-button {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.control-panel .panel-button {
+    width: 48%; /* Ajustement spécifique pour les boutons dans control-panel */
+}
+
+.command-panel .panel-button {
+    width: 100%; /* Ajustement pour les boutons dans command-panel */
+}
+

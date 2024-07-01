@@ -3,75 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href = "gestion.css">
+    <link rel="stylesheet" href="gestion.css">
     <title>Control Panel</title>
 </head>
 <body>
-    <div class="calibration-panel">
-        <h3>Calibrage</h3>
-        <p>Déplacer les doigts pour qu'ils soient complètement dépliés</p>
-        <button id="startCalibration">Commencer Calibrage</button>
-        <div class="motor-controls">
-            <div class="motor-control" data-motor="1">Pouce (Doigt 1): 
-                <div class="buttons">
-                    <button class="up" onmousedown="sendCalibrateCommand('motor1:up')" onmouseup="sendCalibrateCommand('motor1:stop')">↑</button>
-                    <button class="down" onmousedown="sendCalibrateCommand('motor1:down')" onmouseup="sendCalibrateCommand('motor1:stop')">↓</button>
+    <header class="header">
+        <div class="container">
+            <div class="header-logo">
+                <img src="Vista Logos/logo-transparent-png.png" alt="Logo">
+            </div>
+            <nav class="navbar-menu">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"><img src="image/menu.png" alt="Logo">
+                        <ul class="dropdown">
+                            <li><a href="login.html" class="dropdown-link"><img src="image/maison (1).png" alt="Logo"></a></li>
+                            <li><a href="contact.html" class="dropdown-link"><img src="image/lettre.png" alt="Logo"></a></li>
+                        </ul>
+                    </li>
+            </nav>
+        </div>
+    </header>
+    <div class="main-container">
+<body>
+    <div class="main-container">
+        <div class="calibration-panel">
+            <h3>Calibrage</h3>
+            <p>Déplacer les doigts pour qu'ils soient complètement dépliés</p>
+            <button id="startCalibration">Commencer Calibrage</button>
+            <div class="motor-controls">
+                <div class="motor-control" data-motor="1">Pouce (Doigt 1): 
+                    <div class="buttons">
+                        <button class="up" onmousedown="sendCalibrateCommand('motor1:up')" onmouseup="sendCalibrateCommand('motor1:stop')">↑</button>
+                        <button class="down" onmousedown="sendCalibrateCommand('motor1:down')" onmouseup="sendCalibrateCommand('motor1:stop')">↓</button>
+                    </div>
                 </div>
+                <div class="motor-control" data-motor="2">Index (Doigt 2): 
+                    <div class="buttons">
+                        <button class="up" onmousedown="sendCalibrateCommand('motor2:up')" onmouseup="sendCalibrateCommand('motor2:stop')">↑</button>
+                        <button class="down" onmousedown="sendCalibrateCommand('motor2:down')" onmouseup="sendCalibrateCommand('motor2:stop')">↓</button>
+                    </div>
+                </div>
+                <div class="motor-control" data-motor="3">Majeur (Doigt 3): 
+                    <div class="buttons">
+                        <button class="up" onmousedown="sendCalibrateCommand('motor3:up')" onmouseup="sendCalibrateCommand('motor3:stop')">↑</button>
+                        <button class="down" onmousedown="sendCalibrateCommand('motor3:down')" onmouseup="sendCalibrateCommand('motor3:stop')">↓</button>
+                    </div>
+                </div>
+                <div class="motor-control" data-motor="4">Annulaire (Doigt 4): 
+                    <div class="buttons">
+                        <button class="up" onmousedown="sendCalibrateCommand('motor4:up')" onmouseup="sendCalibrateCommand('motor4:stop')">↑</button>
+                        <button class="down" onmousedown="sendCalibrateCommand('motor4:down')" onmouseup="sendCalibrateCommand('motor4:stop')">↓</button>
+                    </div>
+                </div>
+                <div class="motor-control" data-motor="5">Petit Doigt (Doigt 5): 
+                    <div class="buttons">
+                        <button class="up" onmousedown="sendCalibrateCommand('motor5:up')" onmouseup="sendCalibrateCommand('motor5:stop')">↑</button>
+                        <button class="down" onmousedown="sendCalibrateCommand('motor5:down')" onmouseup="sendCalibrateCommand('motor5:stop')">↓</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="control-panel">
+            <button id="connect">Connect to Arduino</button>
+            <div class="motor-control" data-motor="1">Pouce (Doigt 1): 
+                <button onclick="sendCommand('finger1:open')">Ouvrir</button>
+                <button onclick="sendCommand('finger1:close')">Fermer</button>
             </div>
             <div class="motor-control" data-motor="2">Index (Doigt 2): 
-                <div class="buttons">
-                    <button class="up" onmousedown="sendCalibrateCommand('motor2:up')" onmouseup="sendCalibrateCommand('motor2:stop')">↑</button>
-                    <button class="down" onmousedown="sendCalibrateCommand('motor2:down')" onmouseup="sendCalibrateCommand('motor2:stop')">↓</button>
-                </div>
+                <button onclick="sendCommand('finger2:open')">Ouvrir</button>
+                <button onclick="sendCommand('finger2:close')">Fermer</button>
             </div>
             <div class="motor-control" data-motor="3">Majeur (Doigt 3): 
-                <div class="buttons">
-                    <button class="up" onmousedown="sendCalibrateCommand('motor3:up')" onmouseup="sendCalibrateCommand('motor3:stop')">↑</button>
-                    <button class="down" onmousedown="sendCalibrateCommand('motor3:down')" onmouseup="sendCalibrateCommand('motor3:stop')">↓</button>
-                </div>
+                <button onclick="sendCommand('finger3:open')">Ouvrir</button>
+                <button onclick="sendCommand('finger3:close')">Fermer</button>
             </div>
             <div class="motor-control" data-motor="4">Annulaire (Doigt 4): 
-                <div class="buttons">
-                    <button class="up" onmousedown="sendCalibrateCommand('motor4:up')" onmouseup="sendCalibrateCommand('motor4:stop')">↑</button>
-                    <button class="down" onmousedown="sendCalibrateCommand('motor4:down')" onmouseup="sendCalibrateCommand('motor4:stop')">↓</button>
-                </div>
+                <button onclick="sendCommand('finger4:open')">Ouvrir</button>
+                <button onclick="sendCommand('finger4:close')">Fermer</button>
             </div>
             <div class="motor-control" data-motor="5">Petit Doigt (Doigt 5): 
-                <div class="buttons">
-                    <button class="up" onmousedown="sendCalibrateCommand('motor5:up')" onmouseup="sendCalibrateCommand('motor5:stop')">↑</button>
-                    <button class="down" onmousedown="sendCalibrateCommand('motor5:down')" onmouseup="sendCalibrateCommand('motor5:stop')">↓</button>
-                </div>
+                <button onclick="sendCommand('finger5:open')">Ouvrir</button>
+                <button onclick="sendCommand('finger5:close')">Fermer</button>
             </div>
+            <div id="status" class="status">Disconnected</div>
         </div>
-    </div>
-    <div class="control-panel">
-        <button id="connect">Connect to Arduino</button>
-        <div class="motor-control" data-motor="1">Pouce (Doigt 1): 
-            <button onclick="sendCommand('finger1:open')">Ouvrir</button>
-            <button onclick="sendCommand('finger1:close')">Fermer</button>
+        <div class="command-panel">
+            <h3>Command Panel</h3>
+            <input type="text" id="commandInput" placeholder="Enter command" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <button id="sendCommand">Send Command</button>
         </div>
-        <div class="motor-control" data-motor="2">Index (Doigt 2): 
-            <button onclick="sendCommand('finger2:open')">Ouvrir</button>
-            <button onclick="sendCommand('finger2:close')">Fermer</button>
-        </div>
-        <div class="motor-control" data-motor="3">Majeur (Doigt 3): 
-            <button onclick="sendCommand('finger3:open')">Ouvrir</button>
-            <button onclick="sendCommand('finger3:close')">Fermer</button>
-        </div>
-        <div class="motor-control" data-motor="4">Annulaire (Doigt 4): 
-            <button onclick="sendCommand('finger4:open')">Ouvrir</button>
-            <button onclick="sendCommand('finger4:close')">Fermer</button>
-        </div>
-        <div class="motor-control" data-motor="5">Petit Doigt (Doigt 5): 
-            <button onclick="sendCommand('finger5:open')">Ouvrir</button>
-            <button onclick="sendCommand('finger5:close')">Fermer</button>
-        </div>
-        <div id="status" class="status">Disconnected</div>
-    </div>
-    <div class="command-panel">
-        <h3>Command Panel</h3>
-        <input type="text" id="commandInput" placeholder="Enter command" style="width: 100%; padding: 10px; margin-bottom: 10px;">
-        <button id="sendCommand">Send Command</button>
     </div>
     <script>
         let isConnected = false;
@@ -138,4 +159,3 @@
     </script>
 </body>
 </html>
-
