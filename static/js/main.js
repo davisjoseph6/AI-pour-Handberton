@@ -5,7 +5,7 @@ let writer;
 
 document.getElementById('connect').addEventListener('click', async () => {
     try {
-        // Demande à l'utilisateur de sélectionner un port série.
+        // Request a serial port and open it with a baud rate of 9600
         port = await navigator.serial.requestPort();
         await port.open({ baudRate: 9600 });
 
@@ -15,7 +15,7 @@ document.getElementById('connect').addEventListener('click', async () => {
         isConnected = true;
         updateStatus('Connected to Arduino');
 
-        // Lire en continu les données du port série.
+        // Continuously read data from the serial port
         readSerialData();
     } catch (error) {
         console.error('Connection failed', error);
@@ -54,6 +54,20 @@ document.getElementById('sendCommand').addEventListener('click', async () => {
     }
 });
 
+document.getElementById('startCalibration').addEventListener('click', () => {
+    sendCommand('startCalibration');
+});
+
+document.querySelectorAll('.up').forEach(button => {
+    button.addEventListener('mousedown', () => sendCalibrateCommand(button.parentElement.parentElement.dataset.motor + ':up'));
+    button.addEventListener('mouseup', () => sendCalibrateCommand(button.parentElement.parentElement.dataset.motor + ':stop'));
+});
+
+document.querySelectorAll('.down').forEach(button => {
+    button.addEventListener('mousedown', () => sendCalibrateCommand(button.parentElement.parentElement.dataset.motor + ':down'));
+    button.addEventListener('mouseup', () => sendCalibrateCommand(button.parentElement.parentElement.dataset.motor + ':stop'));
+});
+
 async function sendCommand(command) {
     try {
         const encoder = new TextEncoder();
@@ -63,6 +77,22 @@ async function sendCommand(command) {
     } catch (error) {
         console.error('Failed to send command', error);
         updateStatus('Failed to send command');
+    }
+}
+
+async function sendCalibrateCommand(command) {
+    try {
+        if (isConnected && writer) {
+            const encoder = new TextEncoder();
+            await writer.write(encoder.encode(command + '\n'));
+            console.log(`Calibrate command sent: ${command}`);
+            updateStatus(`Calibrate command sent: ${command}`);
+        } else {
+            updateStatus('Not connected to Arduino');
+        }
+    } catch (error) {
+        console.error('Failed to send calibrate command', error);
+        updateStatus('Failed to send calibrate command');
     }
 }
 
@@ -77,7 +107,7 @@ async function readSerialData() {
             const decoder = new TextDecoder();
             const data = decoder.decode(value);
             console.log(`Received data: ${data}`);
-            // Traitez les données reçues si nécessaire
+            // Process received data if necessary
         } catch (error) {
             console.error('Failed to read data', error);
             updateStatus('Failed to read data');
@@ -90,6 +120,3 @@ function updateStatus(message) {
     document.getElementById('status').textContent = message;
 }
 
-document.getElementById('startCalibration').addEventListener('click', () => {
-    sendCommand('startCalibration');
-});
