@@ -97,6 +97,7 @@ async function sendCalibrateCommand(command) {
 }
 
 async function readSerialData() {
+    let buffer = '';
     while (isConnected) {
         try {
             const { value, done } = await reader.read();
@@ -105,9 +106,18 @@ async function readSerialData() {
                 break;
             }
             const decoder = new TextDecoder();
-            const data = decoder.decode(value);
-            console.log(`Received data: ${data}`);
-            // Process received data if necessary
+            buffer += decoder.decode(value);
+
+            // Process data if a complete line is received
+            if (buffer.includes('\n')) {
+                const lines = buffer.split('\n');
+                buffer = lines.pop(); // Save any incomplete line to buffer
+
+                lines.forEach(line => {
+                    console.log(`Received data: ${line}`);
+                    processSerialData(line);
+                });
+            }
         } catch (error) {
             console.error('Failed to read data', error);
             updateStatus('Failed to read data');
@@ -116,6 +126,34 @@ async function readSerialData() {
     }
 }
 
+function processSerialData(data) {
+    const currentTimeRegex = /^CurrentTime(\d+):(\d+)$/;
+    const match = currentTimeRegex.exec(data);
+    if (match) {
+        const fingerIndex = match[1];
+        const currentTimeValue = match[2];
+
+        // Check if the element exists before updating
+        const currentTimeElement = document.getElementById(`currentTime${fingerIndex}`);
+        if (currentTimeElement) {
+            currentTimeElement.textContent = `Current Time: ${currentTimeValue}`;
+        } else {
+            console.warn(`Element with ID currentTime${fingerIndex} not found`);
+        }
+    }
+}
+
 function updateStatus(message) {
     document.getElementById('status').textContent = message;
 }
+
+// Add elements to the HTML to display the currentTime values
+document.addEventListener('DOMContentLoaded', () => {
+    for (let i = 1; i <= 5; i++) {
+        const motorControlDiv = document.querySelector(`.motor-control[data-motor="${i}"]`);
+        const currentTimeDiv = document.createElement('div');
+        currentTimeDiv.id = `currentTime${i}`;
+        currentTimeDiv.textContent = 'Current Time: 0';
+        motorControlDiv.appendChild(currentTimeDiv);
+    }
+});
