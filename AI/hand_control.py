@@ -10,6 +10,11 @@ def send_to_arduino(command):
     arduino.write(command + '\n')
     time.sleep(0.1)
 
+def reset_fingers():
+    for i in range(1, 6):
+        send_to_arduino(f'finger{i}:close')
+    time.sleep(0.5)
+
 def countdown(seconds):
     for i in range(1, 6):
         send_to_arduino(f'finger{i}:close')
@@ -58,11 +63,5 @@ def goodbye():
 
 if __name__ == "__main__":
     # Example usage
-    countdown(3)
-    calculate("2 + 3")
-    raise_finger("thumb")
-    respond_to_question("Are you a robot?")
-    rock_n_roll()
-    hello()
     goodbye()
 
