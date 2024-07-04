@@ -22,7 +22,11 @@ label_to_intent = {v: k for k, v in intent_to_label.items()}
 
 @app.route('/')
 def serve_html():
-    return send_from_directory('.', 'handberton-website-proto.html')
+    return send_from_directory('.', 'index.html')
+
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)
 
 @app.route('/process_command', methods=['POST'])
 def process_command():
@@ -37,16 +41,26 @@ def process_command():
     intent = label_to_intent[intent_label]
 
     print(f"Predicted intent: {intent}")
+    print(f"Prediction probabilities: {prediction}")
 
     if intent == 'countdown':
-        seconds = int(re.search(r'\d+', command).group())
-        countdown(seconds)
+        try:
+            seconds = int(re.search(r'\d+', command).group())
+            countdown(seconds)
+        except Exception as e:
+            print(f"Error processing countdown: {e}")
     elif intent == 'calculate':
-        expression = re.findall(r'(\d+ \+ \d+|\d+ - \d+|\d+ \* \d+|\d+ ÷ \d+)', command)[0]
-        calculate(expression)
+        try:
+            expression = re.findall(r'(\d+ \+ \d+|\d+ - \d+|\d+ \* \d+|\d+ ÷ \d+)', command)[0]
+            calculate(expression)
+        except Exception as e:
+            print(f"Error processing calculate: {e}")
     elif intent == 'raise_finger':
-        finger = command.split(' ')[2]
-        raise_finger(finger)
+        try:
+            finger = command.split(' ')[2]
+            raise_finger(finger)
+        except Exception as e:
+            print(f"Error processing raise_finger: {e}")
     elif intent == 'respond_to_question':
         respond_to_question(command)
     elif intent == 'rock_n_roll':
